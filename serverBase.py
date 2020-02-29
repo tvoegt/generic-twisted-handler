@@ -60,7 +60,7 @@ class ServerBase( TwistedBase ):
         '''
         self.clientName = msg.get( EnvMapping.CLIENT_TYPE.value, None )
         if self.clientName:
-            self.factory.clients[ self.clientName ] = self
+            self.factory.clients[ self.clientName + '_{}'.format( self.factory.numConnections ) ] = self
             self.factory.numConnections += 1
             print( '{} Clients Currently being held: {}'.format( self.factory.numConnections, self.factory.clients ) )
             msg = buildMessage( event = EventTypes.REGISTERED.value )
